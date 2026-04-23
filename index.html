@@ -188,13 +188,9 @@ header{
   font-weight:700;font-size:19px;letter-spacing:-.01em;color:var(--ink);
 }
 .brand-mark{
-  width:34px;height:34px;border-radius:8px;display:grid;place-items:center;
-  background:var(--blue);color:#fff;position:relative;overflow:hidden;
+  height:34px;display:flex;align-items:center;
 }
-.brand-mark::after{
-  content:"";position:absolute;top:0;right:0;width:10px;height:100%;background:var(--red);
-}
-.brand-mark svg{width:18px;height:18px;position:relative;z-index:2}
+.brand-mark img{height:100%;width:auto;display:block}
 
 nav.nav{display:flex;gap:4px;align-items:center}
 nav.nav a{
@@ -481,29 +477,58 @@ nav.nav a:hover{color:var(--blue);background:var(--blue-soft)}
   .why p{font-size:12px}
 }
 
-/* ============== WORKS (side-by-side, not hover slider) ============== */
-.wrk-section{background:var(--bg-alt)}
-.wrk-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
-@media (max-width:767px){.wrk-grid{grid-template-columns:1fr;gap:20px}}
-
-.wrk{background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:.25s}
-.wrk:hover{box-shadow:var(--shadow);border-color:var(--blue)}
-.wrk-pair{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);aspect-ratio:2/1}
-.wrk-cell{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--blue-soft),var(--red-soft))}
-.wrk-cell img{width:100%;height:100%;object-fit:cover;display:block}
-.wrk-cell .tag{
-  position:absolute;top:10px;left:10px;padding:4px 10px;border-radius:4px;
-  font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;
+/* ============== CATALOG (products for sale) ============== */
+.cat-section{background:var(--bg-alt)}
+.cat-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
+.cat-filter{
+  padding:9px 16px;border-radius:999px;background:var(--card);border:1px solid var(--line);
+  color:var(--ink-2);font-weight:600;font-size:13px;transition:.2s;
 }
-.wrk-cell.b .tag{background:rgba(26,33,51,.8);color:#fff}
-.wrk-cell.a .tag{background:var(--red);color:#fff}
+.cat-filter:hover{border-color:var(--red);color:var(--red)}
+.cat-filter.active{background:var(--red);border-color:var(--red);color:#fff}
 
-.wrk-body{padding:20px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.wrk-body h3{font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
-.wrk-body .meta{display:flex;gap:12px;font-size:12px;color:var(--mute);font-weight:600;flex-wrap:wrap}
-.wrk-body .meta span{display:inline-flex;align-items:center;gap:4px}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media (max-width:1023px){.cat-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:767px){.cat-grid{grid-template-columns:repeat(2,1fr);gap:12px}}
+@media (max-width:420px){.cat-grid{grid-template-columns:1fr}}
+
+.cat{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;
+  display:flex;flex-direction:column;transition:.25s;position:relative;
+}
+.cat:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--blue)}
+.cat-img{
+  aspect-ratio:1/1;background:#fff;display:grid;place-items:center;padding:14px;position:relative;
+  border-bottom:1px solid var(--line);
+}
+[data-theme="dark"] .cat-img{background:#f0f2f7}
+.cat-img img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain}
+.cat-badge{
+  position:absolute;top:10px;left:10px;padding:4px 9px;border-radius:4px;
+  font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;letter-spacing:.12em;
+  background:var(--red);color:#fff;
+}
+.cat-badge.new{background:var(--ok)}
+.cat-body{padding:16px;display:flex;flex-direction:column;flex-grow:1;gap:8px}
+.cat-brand{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;color:var(--red);text-transform:uppercase}
+.cat-model{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;color:var(--ink);line-height:1.2;letter-spacing:-.01em}
+.cat-specs{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.cat-spec{padding:3px 8px;border-radius:5px;background:var(--bg-alt);font-size:11px;font-weight:600;color:var(--ink-2)}
+.cat-price{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;color:var(--blue);letter-spacing:-.01em;
+  margin-top:auto;padding-top:10px;
+}
+.cat-price small{font-family:'Manrope',sans-serif;font-size:11px;color:var(--mute);font-weight:500;display:block;margin-top:2px}
+.cat-btn{
+  width:100%;padding:10px;margin-top:10px;background:var(--blue);color:#fff;border-radius:8px;
+  font-weight:700;font-size:13px;transition:.2s;
+}
+.cat-btn:hover{background:var(--red)}
 @media (max-width:480px){
-  .wrk-body{padding:16px;flex-direction:column;align-items:flex-start;gap:8px}
+  .cat-body{padding:12px;gap:6px}
+  .cat-model{font-size:13px}
+  .cat-price{font-size:17px}
+  .cat-btn{padding:9px;font-size:12px}
 }
 
 /* ============== DISTRICTS (pills) ============== */
@@ -755,7 +780,7 @@ footer{background:#0f1628;color:#cbd5e1;padding:64px 0 20px}
   <div class="wrap hrow">
     <a href="#" class="brand" aria-label="KAZ-COLD">
       <span class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15"/></svg>
+        <!-- Логотип: замените на <img src="/images/logo.svg" alt="KAZ-COLD"> -->
       </span>
       <span>KAZ-COLD</span>
     </a>
@@ -763,7 +788,7 @@ footer{background:#0f1628;color:#cbd5e1;padding:64px 0 20px}
     <nav class="nav" aria-label="Главная навигация">
       <a href="#services">Услуги</a>
       <a href="#prices">Цены</a>
-      <a href="#works">Работы</a>
+      <a href="#catalog">Каталог</a>
       <a href="#districts">Районы</a>
       <a href="#faq">FAQ</a>
       <a href="#contacts">Контакты</a>
@@ -1125,62 +1150,190 @@ footer{background:#0f1628;color:#cbd5e1;padding:64px 0 20px}
   </div>
 </section>
 
-<!-- WORKS -->
-<section id="works" class="wrk-section">
+
+
+<!-- CATALOG (products for sale) -->
+<section id="catalog" class="cat-section">
   <div class="wrap">
     <div class="shead">
       <div>
-        <div class="eyebrow">Наши работы</div>
-        <h2>До и&nbsp;<em>после</em></h2>
+        <div class="eyebrow">Каталог товаров</div>
+        <h2>Кондиционеры в&nbsp;<em>продаже</em></h2>
       </div>
-      <p class="lead">Реальные кейсы наших мастеров в&nbsp;Астане. Фото «до» и&nbsp;«после» — рядом, чтобы сразу видеть разницу.</p>
+      <p class="lead">Официальная техника от&nbsp;ведущих производителей. Продажа, установка, ремонт и&nbsp;обслуживание — всё в&nbsp;одном месте. Цены указаны за&nbsp;комплект «внутренний + наружный блок».</p>
     </div>
 
-    <div class="wrk-grid">
-      <div class="wrk">
-        <div class="wrk-pair">
-          <div class="wrk-cell b"><img src="/images/work-1-before.jpg" alt="Кондиционер до чистки"><div class="tag">ДО</div></div>
-          <div class="wrk-cell a"><img src="/images/work-1-after.jpg" alt="Кондиционер после чистки"><div class="tag">ПОСЛЕ</div></div>
-        </div>
-        <div class="wrk-body">
-          <h3>Чистка кондиционера</h3>
-          <div class="meta"><span>📍 Есиль</span><span>⏱ 2 ч</span><span>💰 16 000 ₸</span></div>
+    <div class="cat-filters">
+      <button class="cat-filter active" data-brand="all">Все бренды</button>
+      <button class="cat-filter" data-brand="haier">Haier</button>
+      <button class="cat-filter" data-brand="lg">LG</button>
+      <button class="cat-filter" data-brand="samsung">Samsung</button>
+      <button class="cat-filter" data-brand="toshiba">Toshiba</button>
+    </div>
+
+    <div class="cat-grid" id="catGrid">
+      <!-- Haier -->
+      <div class="cat" data-brand="haier">
+        <div class="cat-img"><img src="/images/ac-haier-hsu07.jpg" alt="Haier HSU-07HPL"><span class="cat-badge">HIT</span></div>
+        <div class="cat-body">
+          <div class="cat-brand">Haier · ON/OFF</div>
+          <div class="cat-model">HSU-07HPL303/R3</div>
+          <div class="cat-specs"><span class="cat-spec">до 20 м²</span><span class="cat-spec">2,1 кВт</span><span class="cat-spec">R32</span></div>
+          <div class="cat-price">146 200 ₸<small>с&nbsp;установкой — уточняйте</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','Haier HSU-07HPL303/R3')">Заказать</button>
         </div>
       </div>
 
-      <div class="wrk">
-        <div class="wrk-pair">
-          <div class="wrk-cell b"><img src="/images/work-2-before.jpg" alt="Стеклокерамика до"><div class="tag">ДО</div></div>
-          <div class="wrk-cell a"><img src="/images/work-2-after.jpg" alt="Стеклокерамика после"><div class="tag">ПОСЛЕ</div></div>
-        </div>
-        <div class="wrk-body">
-          <h3>Полировка стеклокерамики</h3>
-          <div class="meta"><span>📍 Алматы р-н</span><span>⏱ 1 ч</span><span>💰 11 000 ₸</span></div>
-        </div>
-      </div>
-
-      <div class="wrk">
-        <div class="wrk-pair">
-          <div class="wrk-cell b"><img src="/images/work-3-before.jpg" alt="Стиральная машина до"><div class="tag">ДО</div></div>
-          <div class="wrk-cell a"><img src="/images/work-3-after.jpg" alt="Стиральная машина после"><div class="tag">ПОСЛЕ</div></div>
-        </div>
-        <div class="wrk-body">
-          <h3>Ремонт стиральной Bosch</h3>
-          <div class="meta"><span>📍 Сарыарка</span><span>⏱ Замена ТЭНа</span><span>💰 15 000 ₸</span></div>
+      <div class="cat" data-brand="haier">
+        <div class="cat-img"><img src="/images/ac-haier-hsu09.jpg" alt="Haier HSU-09HPL"></div>
+        <div class="cat-body">
+          <div class="cat-brand">Haier · ON/OFF</div>
+          <div class="cat-model">HSU-09HPL303/R3</div>
+          <div class="cat-specs"><span class="cat-spec">до 25 м²</span><span class="cat-spec">2,5 кВт</span><span class="cat-spec">R32</span></div>
+          <div class="cat-price">154 700 ₸<small>серия CORAL · Wi-Fi</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','Haier HSU-09HPL303/R3')">Заказать</button>
         </div>
       </div>
 
-      <div class="wrk">
-        <div class="wrk-pair">
-          <div class="wrk-cell b"><img src="/images/work-4-before.jpg" alt="Внутренний блок до химчистки"><div class="tag">ДО</div></div>
-          <div class="wrk-cell a"><img src="/images/work-4-after.jpg" alt="Внутренний блок после химчистки"><div class="tag">ПОСЛЕ</div></div>
+      <div class="cat" data-brand="haier">
+        <div class="cat-img"><img src="/images/ac-haier-as25.jpg" alt="Haier AS25HQJ1HRA"><span class="cat-badge new">DC</span></div>
+        <div class="cat-body">
+          <div class="cat-brand">Haier · Инвертор</div>
+          <div class="cat-model">AS25HQJ1HRA-W</div>
+          <div class="cat-specs"><span class="cat-spec">до 25 м²</span><span class="cat-spec">2,7 кВт</span><span class="cat-spec">R32</span></div>
+          <div class="cat-price">203 100 ₸<small>QUANTUM · Wi-Fi</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','Haier AS25HQJ1HRA')">Заказать</button>
         </div>
-        <div class="wrk-body">
-          <h3>Химчистка блока Daikin</h3>
-          <div class="meta"><span>📍 Байконур</span><span>⏱ 40 мин</span><span>💰 13 000 ₸</span></div>
+      </div>
+
+      <div class="cat" data-brand="haier">
+        <div class="cat-img"><img src="/images/ac-haier-as35.jpg" alt="Haier AS35HPL2HRA"></div>
+        <div class="cat-body">
+          <div class="cat-brand">Haier · Инвертор</div>
+          <div class="cat-model">AS35HPL2HRA</div>
+          <div class="cat-specs"><span class="cat-spec">до 35 м²</span><span class="cat-spec">3,4 кВт</span><span class="cat-spec">R32</span></div>
+          <div class="cat-price">256 600 ₸<small>серия CORAL DC</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','Haier AS35HPL2HRA')">Заказать</button>
+        </div>
+      </div>
+
+      <!-- LG -->
+      <div class="cat" data-brand="lg">
+        <div class="cat-img"><img src="/images/ac-lg-w09.jpg" alt="LG W09TI"><span class="cat-badge">HIT</span></div>
+        <div class="cat-body">
+          <div class="cat-brand">LG · Pro Inverter</div>
+          <div class="cat-model">W09TI</div>
+          <div class="cat-specs"><span class="cat-spec">до 25 м²</span><span class="cat-spec">2,5 кВт</span><span class="cat-spec">с&nbsp;инст.</span></div>
+          <div class="cat-price">229 990 ₸<small>установка включена</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','LG W09TI')">Заказать</button>
+        </div>
+      </div>
+
+      <div class="cat" data-brand="lg">
+        <div class="cat-img"><img src="/images/ac-lg-b09.jpg" alt="LG B09TS"></div>
+        <div class="cat-body">
+          <div class="cat-brand">LG · ProCOOL</div>
+          <div class="cat-model">B09TS</div>
+          <div class="cat-specs"><span class="cat-spec">до 25 м²</span><span class="cat-spec">Dual Invertor</span><span class="cat-spec">Wi-Fi</span></div>
+          <div class="cat-price">279 990 ₸<small>ThinQ · Smart Inverter</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','LG B09TS')">Заказать</button>
+        </div>
+      </div>
+
+      <div class="cat" data-brand="lg">
+        <div class="cat-img"><img src="/images/ac-lg-ap09.jpg" alt="LG AP09RK"><span class="cat-badge new">NEW</span></div>
+        <div class="cat-body">
+          <div class="cat-brand">LG · Air Puricare</div>
+          <div class="cat-model">AP09RK</div>
+          <div class="cat-specs"><span class="cat-spec">до 25 м²</span><span class="cat-spec">+очиститель</span><span class="cat-spec">R32</span></div>
+          <div class="cat-price">354 990 ₸<small>воздухоочиститель · ThinQ</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','LG AP09RK')">Заказать</button>
+        </div>
+      </div>
+
+      <div class="cat" data-brand="lg">
+        <div class="cat-img"><img src="/images/ac-lg-h12.jpg" alt="LG H12S1D"></div>
+        <div class="cat-body">
+          <div class="cat-brand">LG · AirFit Deluxe</div>
+          <div class="cat-model">H12S1D</div>
+          <div class="cat-specs"><span class="cat-spec">до 35 м²</span><span class="cat-spec">Dual Inverter</span><span class="cat-spec">Wi-Fi</span></div>
+          <div class="cat-price">389 990 ₸<small>гарантия 10&nbsp;лет на&nbsp;компрессор</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','LG H12S1D')">Заказать</button>
+        </div>
+      </div>
+
+      <!-- Samsung -->
+      <div class="cat" data-brand="samsung">
+        <div class="cat-img"><img src="/images/ac-samsung-ar09tx.jpg" alt="Samsung AR09TXHQASINUA"><span class="cat-badge">HIT</span></div>
+        <div class="cat-body">
+          <div class="cat-brand">Samsung · AR3000</div>
+          <div class="cat-model">AR09TXHQASINUA</div>
+          <div class="cat-specs"><span class="cat-spec">до 25 м²</span><span class="cat-spec">Инвертор</span><span class="cat-spec">HD-фильтр</span></div>
+          <div class="cat-price">219 990 ₸<small>комфортный сон</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','Samsung AR09TXHQASINUA')">Заказать</button>
+        </div>
+      </div>
+
+      <div class="cat" data-brand="samsung">
+        <div class="cat-img"><img src="/images/ac-samsung-ar12tx.jpg" alt="Samsung AR12TXHQASINUA"></div>
+        <div class="cat-body">
+          <div class="cat-brand">Samsung · AR3000</div>
+          <div class="cat-model">AR12TXHQASINUA</div>
+          <div class="cat-specs"><span class="cat-spec">до 35 м²</span><span class="cat-spec">Инвертор</span><span class="cat-spec">HD-фильтр</span></div>
+          <div class="cat-price">249 990 ₸<small>Smart Home</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','Samsung AR12TXHQASINUA')">Заказать</button>
+        </div>
+      </div>
+
+      <div class="cat" data-brand="samsung">
+        <div class="cat-img"><img src="/images/ac-samsung-ar60.jpg" alt="Samsung AR60F09C1DWNER"><span class="cat-badge new">WIND-FREE</span></div>
+        <div class="cat-body">
+          <div class="cat-brand">Samsung · Wind-Free</div>
+          <div class="cat-model">AR60F09C1DWNER</div>
+          <div class="cat-specs"><span class="cat-spec">до 25 м²</span><span class="cat-spec">Wind-Free</span><span class="cat-spec">SmartThings</span></div>
+          <div class="cat-price">304 990 ₸<small>антикоррозийное покрытие</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','Samsung AR60F09C1DWNER')">Заказать</button>
+        </div>
+      </div>
+
+      <div class="cat" data-brand="samsung">
+        <div class="cat-img"><img src="/images/ac-samsung-ar9500.jpg" alt="Samsung AR9500T"><span class="cat-badge new">AI</span></div>
+        <div class="cat-body">
+          <div class="cat-brand">Samsung · Bespoke AI</div>
+          <div class="cat-model">AR70F09C1BWNER</div>
+          <div class="cat-specs"><span class="cat-spec">до 25 м²</span><span class="cat-spec">AI cooling</span><span class="cat-spec">Wind-Free</span></div>
+          <div class="cat-price">344 990 ₸<small>фильтр PM&nbsp;2.5 · Wi-Fi</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','Samsung AR70F09C1BWNER')">Заказать</button>
+        </div>
+      </div>
+
+      <!-- Toshiba -->
+      <div class="cat" data-brand="toshiba">
+        <div class="cat-img"><img src="/images/ac-toshiba-ras07.jpg" alt="Toshiba RAS-07U2KHS-EE"><span class="cat-badge">SALE</span></div>
+        <div class="cat-body">
+          <div class="cat-brand">Toshiba · ON/OFF</div>
+          <div class="cat-model">RAS-07U2KHS-EE</div>
+          <div class="cat-specs"><span class="cat-spec">до 20 м²</span><span class="cat-spec">2,1 кВт</span><span class="cat-spec">Распродажа</span></div>
+          <div class="cat-price">135 000 ₸<small>настенный сплит</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','Toshiba RAS-07U2KHS-EE')">Заказать</button>
+        </div>
+      </div>
+
+      <div class="cat" data-brand="toshiba">
+        <div class="cat-img"><img src="/images/ac-toshiba-ras09.jpg" alt="Toshiba RAS-09U2KHS-EE"><span class="cat-badge">SALE</span></div>
+        <div class="cat-body">
+          <div class="cat-brand">Toshiba · ON/OFF</div>
+          <div class="cat-model">RAS-09U2KHS-EE</div>
+          <div class="cat-specs"><span class="cat-spec">до 25 м²</span><span class="cat-spec">2,5 кВт</span><span class="cat-spec">Распродажа</span></div>
+          <div class="cat-price">150 000 ₸<small>настенный сплит</small></div>
+          <button class="cat-btn" onclick="openModal('order','Покупка кондиционера','Toshiba RAS-09U2KHS-EE')">Заказать</button>
         </div>
       </div>
     </div>
+
+    <p style="text-align:center;margin-top:32px;color:var(--mute);font-size:13.5px">
+      Не&nbsp;нашли нужную модель? <a href="#" onclick="openModal('order','Подбор кондиционера');return false" style="color:var(--red);font-weight:700;border-bottom:1px dashed var(--red)">Напишите нам</a> — подберём под&nbsp;ваш бюджет и&nbsp;площадь.
+    </p>
   </div>
 </section>
 
@@ -1420,7 +1573,7 @@ footer{background:#0f1628;color:#cbd5e1;padding:64px 0 20px}
         <h4>Информация</h4>
         <ul>
           <li><a href="#prices">Прайс-лист</a></li>
-          <li><a href="#works">Наши работы</a></li>
+          <li><a href="#catalog">Каталог товаров</a></li>
           <li><a href="#districts">Районы Астаны</a></li>
           <li><a href="#legal">Юридическим лицам</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -1484,7 +1637,7 @@ footer{background:#0f1628;color:#cbd5e1;padding:64px 0 20px}
   <aside class="bmenu-panel">
     <div class="bmenu-head">
       <div class="brand">
-        <span class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20M4.5 4.5l15 15M19.5 4.5l-15 15"/></svg></span>
+        <span class="brand-mark"><!-- лого --></span>
         <span>KAZ-COLD</span>
       </div>
       <button class="bmenu-close" onclick="closeBurger()" aria-label="Закрыть"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
@@ -1510,9 +1663,17 @@ footer{background:#0f1628;color:#cbd5e1;padding:64px 0 20px}
         <a href="#districts" onclick="closeBurger()">Нура</a>
       </div>
       <div class="bmenu-grp">
+        <h5>Товары · продажа</h5>
+        <a href="#catalog" onclick="closeBurger()">Кондиционеры Haier</a>
+        <a href="#catalog" onclick="closeBurger()">Кондиционеры LG</a>
+        <a href="#catalog" onclick="closeBurger()">Кондиционеры Samsung</a>
+        <a href="#catalog" onclick="closeBurger()">Кондиционеры Toshiba</a>
+        <a href="#catalog" onclick="closeBurger()">Весь каталог</a>
+      </div>
+      <div class="bmenu-grp">
         <h5>Для клиентов</h5>
         <a href="#prices" onclick="closeBurger()">Прайс-лист</a>
-        <a href="#works" onclick="closeBurger()">Наши работы</a>
+        <a href="#catalog" onclick="closeBurger()">Каталог товаров</a>
         <a href="#legal" onclick="closeBurger()">Юридическим лицам</a>
         <a href="#why" onclick="closeBurger()">Гарантия</a>
         <a href="#faq" onclick="closeBurger()">FAQ</a>
@@ -1547,6 +1708,8 @@ footer{background:#0f1628;color:#cbd5e1;padding:64px 0 20px}
         <div class="frow two">
           <div class="ffield"><label>Тип услуги</label><select name="service" id="orderService">
             <option value="">Выберите услугу</option>
+            <option>Покупка кондиционера</option>
+            <option>Установка кондиционера</option>
             <option>Заправка фреоном</option>
             <option>Чистка кондиционера</option>
             <option>Ремонт кондиционера</option>
@@ -1555,6 +1718,7 @@ footer{background:#0f1628;color:#cbd5e1;padding:64px 0 20px}
             <option>Ремонт посудомоечной машины</option>
             <option>Ремонт сушильной машины</option>
             <option>Полировка варочной панели</option>
+            <option>Подбор кондиционера</option>
             <option>Консультация</option>
           </select></div>
           <div class="ffield"><label>Тип техники</label><select name="equip">
@@ -1685,6 +1849,18 @@ svcFilters.forEach(b => b.addEventListener('click', () => {
   const f = b.dataset.filter;
   svcCards.forEach(c => {
     c.style.display = (f === 'all' || c.dataset.cat === f) ? '' : 'none';
+  });
+}));
+
+/* ===== CATALOG FILTER ===== */
+const catFilters = document.querySelectorAll('.cat-filter');
+const catCards = document.querySelectorAll('.cat');
+catFilters.forEach(b => b.addEventListener('click', () => {
+  catFilters.forEach(x => x.classList.remove('active'));
+  b.classList.add('active');
+  const f = b.dataset.brand;
+  catCards.forEach(c => {
+    c.style.display = (f === 'all' || c.dataset.brand === f) ? '' : 'none';
   });
 }));
 
